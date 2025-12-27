@@ -85,7 +85,7 @@ else()
 endif()
 
 if(ENABLE_FORTRAN)
-  set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/include)
+  set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/include)
 endif()
 
 include(CMakePackageConfigHelpers)
@@ -301,14 +301,14 @@ configure_file(mpi-cxx.pc.in mpi-cxx.pc @ONLY)
 configure_file(mpi-fort.pc.in mpi-fort.pc @ONLY)
 install(
   FILES
-  ${CMAKE_BINARY_DIR}/MPItrampoline.pc
-  ${CMAKE_BINARY_DIR}/mpi-c.pc
-  ${CMAKE_BINARY_DIR}/mpi-cxx.pc
-  ${CMAKE_BINARY_DIR}/mpi-fort.pc
+  ${CMAKE_CURRENT_BINARY_DIR}/MPItrampoline.pc
+  ${CMAKE_CURRENT_BINARY_DIR}/mpi-c.pc
+  ${CMAKE_CURRENT_BINARY_DIR}/mpi-cxx.pc
+  ${CMAKE_CURRENT_BINARY_DIR}/mpi-fort.pc
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
   )
 install(
-  FILES ${CMAKE_BINARY_DIR}/mpi-c.pc
+  FILES ${CMAKE_CURRENT_BINARY_DIR}/mpi-c.pc
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
   )
 
