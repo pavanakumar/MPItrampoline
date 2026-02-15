@@ -19,14 +19,18 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-24.04, macos-13, macos-14]
+        os:
+        - ubuntu-24.04
+        - ubuntu-24.04-arm
+        - macos-15
+        - macos-15-intel
         fortran: [fortran-off, fortran-on]
         shared: [shared-off, shared-on]
 
     runs-on: ${{matrix.os}}
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
 
     - name: Configure
       run: |
@@ -41,12 +45,12 @@ jobs:
                 -DCMAKE_INSTALL_PREFIX=$HOME/mpitrampoline
             ;;
         macOS)
-            # Use GCC-14 from Homebrew
+            # Use GCC-15 from Homebrew
             cmake -B ${{github.workspace}}/build \
                 -DENABLE_FORTRAN=${fortran} \
-                -DCMAKE_C_COMPILER=gcc-14 \
-                -DCMAKE_CXX_COMPILER=g++-14 \
-                -DCMAKE_Fortran_COMPILER=gfortran-14 \
+                -DCMAKE_C_COMPILER=gcc-15 \
+                -DCMAKE_CXX_COMPILER=g++-15 \
+                -DCMAKE_Fortran_COMPILER=gfortran-15 \
                 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} \
                 -DBUILD_SHARED_LIBS=${shared} \
                 -DCMAKE_INSTALL_PREFIX=$HOME/mpitrampoline
